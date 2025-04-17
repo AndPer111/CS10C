@@ -1,213 +1,187 @@
 #include <iostream>
+#include <vector>
 #include <string>
-#include "stack.h"
 #include <stdexcept>
 
 using namespace std;
 
+// function declarations
 
-int main()
-{
-   cout << "Enter a test number(1-6): ";
-    int test;
-    cin >> test;
+template <typename T>
+unsigned min_index(const vector<T> &vals, unsigned index);
+
+template <typename T>
+void selection_sort(vector<T> &vals);
+
+template <typename T>
+T getElement(vector<T> &vals, int index);
+
+vector<char> createVector();
+
+int main() {
+    // integer vector test
+    vector<int> intVect = {10, 30, 50, 70, 90, 1, 45, 40, 80, 100};
+
+    // initial values in a list
+    cout << "Integer list: ";
+
+    for (int i = 0; i < 10; ++i) {
+        cout << intVect.at(i) << " ";
+    }
+    
     cout << endl;
-   //tests constructor, push, pop, top and empty
-   if (test == 1) {
-       try{
-          cout << "\nstack1 constructor called";
-          stack<int> stack1;
-          if(stack1.empty()){
-              cout<<"\nstack1 is empty.";
-          }
-          else{
-              cout<<"\nstack1 is not empty";
-          }
-          cout << "\npush 10";
-          stack1.push( 10 );
-          cout << "\npush 20";
-          stack1.push( 20 );
-          cout << "\npush 30";
-          stack1.push( 30 );
-          cout << "\nstack1 top: ";
-          cout<<stack1.top();
-          cout << "\npop";
-          stack1.pop();
-          cout << "\nstack1 top: ";
-          cout<<stack1.top();
-          cout << "\npop";
-          stack1.pop();
-          cout << "\nstack1 top: ";
-          cout<<stack1.top();
-          cout << "\npop";
-          stack1.pop();
-          if(stack1.empty()){
-              cout<<"\nstack1 is empty.";
-          }
-          else{
-              cout<<"\nstack1 is not empty";
-          }
-          cout << endl;
-       }
-       catch(underflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(overflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(out_of_range & e){
-           cout<<e.what()<<endl;
-       }
-   }
-   //tests top on empty stack
-   if (test == 2) {
-       try{
-          cout << "\nstack2 constructor called";
-          stack<int> stack2;
-          cout << "\nstack2 top: ";
-          cout<<stack2.top();
-          cout << endl;
-       }
-       catch(underflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(overflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(out_of_range & e){
-           cout<<e.what()<<endl;
-       }
-   }
-   //tests pop from an empty stack
-   if (test == 3) {
-       try{
-          cout << "\nstack3 constructor called";
-          stack<int> stack3;
-          cout<<"\npop from empty stack\n";
-          stack3.pop();
-          cout << endl;
-       }
-       catch(underflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(overflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(out_of_range & e){
-           cout<<e.what()<<endl;
-       }
-   }
-   //tests push to a full stack
-   if (test == 4) {
-       try{
-          cout << "\nstack4 constructor called";
-          stack<int> stack4;
-          cout << "\npush 20 elements";
-          for(int i = 1; i <=20; ++i){
-              stack4.push(i);
-          }
-          cout<<"\nstack4 top: ";
-          cout<<stack4.top();
-          cout<<"\npush 21\n";
-          stack4.push(21);
-          cout << endl;
-       }
-       catch(underflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(overflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(out_of_range & e){
-           cout<<e.what()<<endl;
-       }
-   }
-   //tests stack of strings
-   if (test == 5) {
-       try{
-          cout << "\nstack5 constructor called";
-          stack<string> stack5;
-          cout << "\npush A";
-          stack5.push("A");
-          cout << "\npush B";
-          stack5.push("B");
-          cout << "\npush C";
-          stack5.push("C");
-          cout << "\nstack5 top: ";
-          cout<<stack5.top();
-          cout << "\npop";
-          stack5.pop();
-          cout << "\nstack5 top: ";
-          cout<<stack5.top();
-          cout << "\npop";
-          stack5.pop();
-          cout << "\nstack5 top: ";
-          cout<<stack5.top();
-          cout << "\npop";
-          stack5.pop();
-          if(stack5.empty()){
-              cout<<"\nstack5 is empty.";
-          }
-          else{
-              cout<<"\nstack5 is not empty";
-          }
-          cout << "\nstack5 top: \n";
-          stack5.top();
-          cout << endl;
-       }
-       catch(underflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(overflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(out_of_range & e){
-           cout<<e.what()<<endl;
-       }
-   }
 
-   //tests stack of strings
-   if (test == 6) {
-       try{
-          cout << "\nstack6 constructor called";
-          stack<string> stack6;
-          cout << "\npush A";
-          stack6.push("A");
-          cout << "\npush B";
-          stack6.push("B");
-          cout << "\npush C";
-          stack6.push("C");
-          cout << "\nstack5 top: ";
-          cout<<stack6.top();
-          cout << "\npopping two items";
-          stack6.pop_two();
-          cout << "\nstack5 top: ";
-          cout<<stack6.top();
-          cout << "\npopping 2 items\n";
-          stack6.pop_two();
-          cout << "\nstack5 top: ";
-          cout<<stack6.top();
-          cout << "\npopping two items\n";
-          stack6.pop_two();
-          if(stack6.empty()){
-              cout<<"\nstack6 is empty.";
-          }
-          else{
-              cout<<"\nstack6 is not empty";
-          }
-          cout << "\nstack6 top: \n";
-          stack6.top();
-          cout << endl;
-       }
-       catch(underflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(overflow_error & e){
-           cout<<e.what()<<endl;
-       }
-       catch(out_of_range & e){
-           cout<<e.what()<<endl;
-       }
-   }
+    // test selection sort (includes min_index function in it)
+    selection_sort(intVect);
+
+    // output sorted vector
+    cout << "New List: ";
+    for (int i = 0; i < 10; ++i) {
+        cout << intVect.at(i) << " ";
+    }
+    cout << endl;
+
+    // testing double vector
+    vector<double> doubleVect = {10.50, 30.33, 50.68, 70.99, 90.23, 1.4, 45.66, 40.82, 80.83, 100.7};
+
+    // initial values in a list
+    cout << "Double list: ";
+
+    for (int i = 0; i < 10; ++i) {
+        cout << doubleVect.at(i) << " ";
+    }
+    
+    cout << endl;
+
+    // test selection sort 
+    selection_sort(doubleVect);
+
+    // output sorted vector
+    cout << "New Double List: ";
+    for (int i = 0; i < 10; ++i) {
+        cout << doubleVect.at(i) << " ";
+    }
+    cout << endl;
+
+    // testing string vector
+    vector<string> stringVect = {"The", "And", "Thomas", "Steven", "Mark", "John", "Devin", "Denzel", "Tom", "Patrick"};
+    
+    // output initial string
+    cout << "String List: ";
+    for (int i = 0; i < 10; ++i) {
+        cout << stringVect.at(i) << " ";
+    }
+    
+    cout << endl;
+
+    // test selection sort for string
+    selection_sort(stringVect);
+
+    // output new list
+    cout << "New String List: "; 
+
+    for (int i = 0; i < 10; ++i) {
+        cout << stringVect.at(i) << " ";
+    }
+
+    cout << endl;
+
+    // test for char
+    vector<char> charVect = {"A", "E", "I", "U", "O", "Z", "Q", "L", "P", "T"}
+    
+    // output initial string
+    cout << "Char List: ";
+    for (int i = 0; i < 10; ++i) {
+        cout << charVect.at(i) << " ";
+    }
+    
+    cout << endl;
+
+    // test selection sort for string
+    selection_sort(charVect);
+
+    // output new list
+    cout << "New Char List: "; 
+
+    for (int i = 0; i < 10; ++i) {
+        cout << charVect.at(i) << " ";
+    }
+
+    cout << endl;
+
+    
+    //Part B
+    try {
+        srand(time(0));
+        vector<char> vals = createVector();
+        char curChar;
+        int index;
+        int numOfRuns = 10;
+
+        while(--numOfRuns >= 0) {
+            cout << "Enter a number: " << endl;
+            cin >> index;
+            curChar = getElement(vals,index);
+            cout << "Element located at " << index << ": is " << curChar << endl;
+        }
+    }
+    catch (out_of_range& excpt) {
+        cout << excpt.what() << endl;
+        cout << "Out of range" << endl;
+    }
+
     return 0;
 }
+
+// function implementations
+template <typename T>
+unsigned min_index(const vector<T> &vals, unsigned index) {
+    unsigned minVal = index;
+    // for loop to get the min val using index
+    for (unsigned int i = index; i < vals.size(); ++i) {
+
+        if (vals.at(i) < vals.at(minVal)) {
+            minVal = i;
+        }
+    }
+
+    return minVal;
+}
+
+template <typename T>
+void selection_sort(vector<T> &vals) {
+    // sort list using for loop by getting the minIndex and swapping it till the list is switched to smallest to largest
+    for (unsigned int i = 0; i < vals.size(); ++i) {
+        unsigned minIndex = min_index(vals, i);
+        T value = vals.at(i);
+        vals.at(i) = vals.at(minIndex);
+        vals.at(minIndex) = value;
+    }
+}
+
+// getter to get the value at specific index
+template <typename T>
+T getElement(vector<T> &vals, int index) {
+    // Compare size to unsigned int or else get warning
+    unsigned compIndex = index;
+    if (index < 0 || compIndex >= vals.size()) {
+        throw out_of_range("out of range exception occured");
+    }
+
+    return vals.at(index);
+}
+
+// given function
+vector<char> createVector() {
+    int vecSize = rand() % 26;
+    char c = 'a';
+    vector<char> vals;
+    
+    for(int i = 0; i < vecSize; i++) {
+        vals.push_back(c);
+        c++;
+    }
+   
+    return vals;
+}
+
