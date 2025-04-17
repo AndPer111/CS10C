@@ -1,160 +1,213 @@
 #include <iostream>
-
 #include <string>
-
-#include "Playlist.h"
+#include "stack.h"
+#include <stdexcept>
 
 using namespace std;
 
-Playlist* playlist;
 
-// Print Menu Function
-void PrintMenu(string title);
-
-int main() {
-    string title;
-    
-    cout << "Enter playlist's title:" << endl;
-    getline(cin, title);
+int main()
+{
+   cout << "Enter a test number(1-6): ";
+    int test;
+    cin >> test;
     cout << endl;
+   //tests constructor, push, pop, top and empty
+   if (test == 1) {
+       try{
+          cout << "\nstack1 constructor called";
+          stack<int> stack1;
+          if(stack1.empty()){
+              cout<<"\nstack1 is empty.";
+          }
+          else{
+              cout<<"\nstack1 is not empty";
+          }
+          cout << "\npush 10";
+          stack1.push( 10 );
+          cout << "\npush 20";
+          stack1.push( 20 );
+          cout << "\npush 30";
+          stack1.push( 30 );
+          cout << "\nstack1 top: ";
+          cout<<stack1.top();
+          cout << "\npop";
+          stack1.pop();
+          cout << "\nstack1 top: ";
+          cout<<stack1.top();
+          cout << "\npop";
+          stack1.pop();
+          cout << "\nstack1 top: ";
+          cout<<stack1.top();
+          cout << "\npop";
+          stack1.pop();
+          if(stack1.empty()){
+              cout<<"\nstack1 is empty.";
+          }
+          else{
+              cout<<"\nstack1 is not empty";
+          }
+          cout << endl;
+       }
+       catch(underflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(overflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(out_of_range & e){
+           cout<<e.what()<<endl;
+       }
+   }
+   //tests top on empty stack
+   if (test == 2) {
+       try{
+          cout << "\nstack2 constructor called";
+          stack<int> stack2;
+          cout << "\nstack2 top: ";
+          cout<<stack2.top();
+          cout << endl;
+       }
+       catch(underflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(overflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(out_of_range & e){
+           cout<<e.what()<<endl;
+       }
+   }
+   //tests pop from an empty stack
+   if (test == 3) {
+       try{
+          cout << "\nstack3 constructor called";
+          stack<int> stack3;
+          cout<<"\npop from empty stack\n";
+          stack3.pop();
+          cout << endl;
+       }
+       catch(underflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(overflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(out_of_range & e){
+           cout<<e.what()<<endl;
+       }
+   }
+   //tests push to a full stack
+   if (test == 4) {
+       try{
+          cout << "\nstack4 constructor called";
+          stack<int> stack4;
+          cout << "\npush 20 elements";
+          for(int i = 1; i <=20; ++i){
+              stack4.push(i);
+          }
+          cout<<"\nstack4 top: ";
+          cout<<stack4.top();
+          cout<<"\npush 21\n";
+          stack4.push(21);
+          cout << endl;
+       }
+       catch(underflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(overflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(out_of_range & e){
+           cout<<e.what()<<endl;
+       }
+   }
+   //tests stack of strings
+   if (test == 5) {
+       try{
+          cout << "\nstack5 constructor called";
+          stack<string> stack5;
+          cout << "\npush A";
+          stack5.push("A");
+          cout << "\npush B";
+          stack5.push("B");
+          cout << "\npush C";
+          stack5.push("C");
+          cout << "\nstack5 top: ";
+          cout<<stack5.top();
+          cout << "\npop";
+          stack5.pop();
+          cout << "\nstack5 top: ";
+          cout<<stack5.top();
+          cout << "\npop";
+          stack5.pop();
+          cout << "\nstack5 top: ";
+          cout<<stack5.top();
+          cout << "\npop";
+          stack5.pop();
+          if(stack5.empty()){
+              cout<<"\nstack5 is empty.";
+          }
+          else{
+              cout<<"\nstack5 is not empty";
+          }
+          cout << "\nstack5 top: \n";
+          stack5.top();
+          cout << endl;
+       }
+       catch(underflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(overflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(out_of_range & e){
+           cout<<e.what()<<endl;
+       }
+   }
 
-    // create playlist
-    playlist = new Playlist();
-    
-    PrintMenu(title);
-
+   //tests stack of strings
+   if (test == 6) {
+       try{
+          cout << "\nstack6 constructor called";
+          stack<string> stack6;
+          cout << "\npush A";
+          stack6.push("A");
+          cout << "\npush B";
+          stack6.push("B");
+          cout << "\npush C";
+          stack6.push("C");
+          cout << "\nstack5 top: ";
+          cout<<stack6.top();
+          cout << "\npopping two items";
+          stack6.pop_two();
+          cout << "\nstack5 top: ";
+          cout<<stack6.top();
+          cout << "\npopping 2 items\n";
+          stack6.pop_two();
+          cout << "\nstack5 top: ";
+          cout<<stack6.top();
+          cout << "\npopping two items\n";
+          stack6.pop_two();
+          if(stack6.empty()){
+              cout<<"\nstack6 is empty.";
+          }
+          else{
+              cout<<"\nstack6 is not empty";
+          }
+          cout << "\nstack6 top: \n";
+          stack6.top();
+          cout << endl;
+       }
+       catch(underflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(overflow_error & e){
+           cout<<e.what()<<endl;
+       }
+       catch(out_of_range & e){
+           cout<<e.what()<<endl;
+       }
+   }
     return 0;
-}
-
-void PrintMenu(string title) {
-    // bool to check when 'q' is reached
-    bool quit = false;
-
-    // until 'q' is entered, loop the menu and perform menu options
-    while (!quit) {
-        char option;
-    
-        cout << title << " PLAYLIST MENU" << endl;
-        cout << "a - Add song" << endl;
-        cout << "d - Remove song" << endl;
-        cout << "c - Change position of song" << endl;
-        cout << "s - Output songs by specific artist" << endl;
-        cout << "t - Output total time of playlist (in seconds)" << endl;
-        cout << "o - Output full playlist" << endl;
-        cout << "q - Quit" << endl;
-        cout << endl;
-        cout << "Choose an option:" << endl;
-
-        cin >> option;
-        cin.ignore(); // ignore newline character 
-
-        if (option == 'a') { // add song 
-            string id;
-            string songName;
-            string artistName;
-            int length;
-
-            cout << "ADD SONG" << endl;
-
-            cout << "Enter song's unique ID:" << endl;
-            getline(cin, id);
-
-            cout << "Enter song's name:" << endl;
-            getline(cin, songName);
-
-            cout << "Enter artist's name:" << endl;
-            getline(cin, artistName);
-
-            cout << "Enter song's length (in seconds):" << endl;
-            cin >> length;
-
-            cin.ignore(); // ignore newline character
-
-            // create new playlist node to insert in the list
-            PlaylistNode* newSong = new PlaylistNode(id, songName, artistName, length);
-            
-            // add function used to insert song at the end of the list or first if no songs are inputted already
-            playlist->add(newSong);
-            cout << endl;
-        }
-
-        else if (option == 'd') { // remove song
-            string id;
-
-            cout << "REMOVE SONG" << endl;
-
-            cout << "Enter song's unique ID:" << endl;
-            getline(cin, id);
-
-            // calls function to remove song using id given and stores it in removed node
-            PlaylistNode* removedNode = playlist->remove(id);
-
-            // checks to see if removedNode isn't null, else it outputs that song is not found
-            if (removedNode) {
-                cout << '"' << removedNode->GetSongName() << '"' << " removed." << endl;
-            }
-            
-            else {
-                cout << "Song with unique ID " << id << " not found!" << endl;
-            }
-
-            cout << endl;
-        }
-    
-        else if (option == 'c') { // change position of song
-            int initialPosition;
-            int newPosition;
-
-            cout << "CHANGE POSITION OF SONG" << endl;
-
-            cout << "Enter song's current position:" << endl;
-            cin >> initialPosition;
-            cout << "Enter new position for song:" << endl;
-            cin >> newPosition;
-            
-            cin.ignore(); // ignores newline characters
-
-            // calls change position function using initial and desired position entered
-            playlist->changePosition(initialPosition, newPosition);
-            cout << endl;
-        }
-
-        else if (option == 's') { // output songs by artist
-            string artistName;
-
-            cout << "OUTPUT SONGS BY SPECIFIC ARTIST" << endl;
-        
-            cout << "Enter artist's name:" << endl;
-            getline(cin, artistName);
-
-            cout << endl;
-
-            // calls function to output all songs by artist using artist name entered
-            playlist->songsByArtist(artistName);
-        }
-
-        else if (option == 't') { // total time of playlist
-            cout << "OUTPUT TOTAL TIME OF PLAYLIST (IN SECONDS)" << endl;
-
-            // calls function to find total time
-            cout << "Total time: " << playlist->totalTime() << " seconds" << endl;
-            cout << endl;
-        }
-
-        else if (option == 'o') { // output full playlist
-           
-            // calls print function to print whole playlist 
-            playlist->print(title);
-        }   
-
-        else if (option == 'q') { 
-            // quit bool set to true when 'q' is entered to end while loop
-            quit = true;
-        }
-
-        // if none of the options are entered, output "invalid selection" and loop again
-        else {
-            cout << "Invalid selection." << endl;
-        }
-    }
 }
