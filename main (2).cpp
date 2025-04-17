@@ -1,68 +1,51 @@
+// given code for main
 #include <iostream>
-
-#include "IntList.h"
+#include "Heap.h"
 
 using namespace std;
 
-int main() {
-    // create new IntList called testList
-    IntList *testList = new IntList();
+int menu() {
+  int choice = 0;
+  cout << endl << "Enter menu choice: ";
+  cout << endl;
+  cout 
+    << "1. Enqueue" << endl
+    << "2. Print" << endl
+    << "3. Dequeue" << endl
+    << "4. Quit" << endl;
+  cin >> choice;
 
-    // testing push front (list becomes 30,20,10,5))
-    cout << "Push front" << endl;
-    testList->push_front(5);
-    testList->push_front(10);
-    testList->push_front(20);
-    testList->push_front(30);
-   
-    // output list
-    cout << *testList << endl;
+  // fix buffer just in case non-numeric choice entered
+  // also gets rid of newline character
+  cin.clear();
+  cin.ignore(256, '\n');
+  return choice;
+}
 
-    // test push back (list becomes 30,20,10,5,1,2,3,4)
-    cout << "Push back values" << endl;
-    testList->push_back(1);
-    testList->push_back(2);
-    testList->push_back(3);
-    testList->push_back(4);
+int main(){
+    Heap max_heap;
 
-    // reverse list (list becomes 4,3,2,1,5,10,20,30)
-    cout << "Reversed list: ";
-    testList->printReverse();
-    cout << endl;
+    int choice = menu();
 
-    // testing pop front 
-    cout << "Pop front test" << endl;
-    testList->pop_front();
-    testList->pop_front();
-    testList->pop_front();
-    testList->pop_front();
+    while (choice != 4) {
 
-    // output list
-    cout << *testList << endl;
+    if (choice == 1) {
+      int priority, jobNumber, numPages;
+      cout << "Enter print job to enqueue (priority, job Number, number of pages): ";
+      cin>>priority>>jobNumber>>numPages;
+      cout << endl;
 
-    // test pop back function 
-    cout << "Pop back test" << endl;
-    testList->pop_back();
-    testList->pop_back();
-    testList->pop_back();
-    testList->pop_back();
+      max_heap.enqueue(new PrintJob(priority, jobNumber, numPages));
 
-    // output list
-    cout << *testList << endl;
-
-    // test empty function
-    cout << "Test if empty" << endl;
-    if (testList->empty()) {
-        cout << "List is empty." << endl;
+    } 
+    else if (choice == 2) {
+      max_heap.print();
     }
-
-    else {
-        cout << "The list is not empty yet." << endl;
+    else if (choice == 3) {
+        max_heap.dequeue();
     }
-
-    // delete testList
-    cout << "Test destructor" << endl;
-    delete testList;
-
+    //fix buffer just in case non-numeric choice entered
+    choice = menu();
+    }
     return 0;
 }
